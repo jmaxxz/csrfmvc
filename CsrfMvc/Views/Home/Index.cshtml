@@ -7,21 +7,25 @@
 		<dt>Name</dt><dd>CSRF protected account</dd>
 		<dt>Value</dt><dd>$1000</dd>
 	</dl>
-	<form>
-		<input type="number" value="100" name="amount"></input>
-		<button value="withdraw">Withdraw</button>
-		<button value="withdraw">Deposit</button>
-	</form>
+    @using (Html.BeginForm("Secure","BankAccount"))
+    {
+        @Html.AntiForgeryToken()
+        <input type="number" value="@ViewBag.Balance" name="amount"></input>
+        <input type="submit" value="withdraw" name="action"></input>
+        <input type="submit" value="deposit" name="action"></input>
+    }
 </div>
 <div class="account unchecked">
 	<dl>
 		<dt>Name</dt><dd>Unprotected Account</dd>
 		<dt>Value</dt><dd>$1000</dd>
 	</dl>
-	<form>
-		<input type="number" value="100" name="amount"></input>
+	@using (Html.BeginForm("SecureWithdraw", "BankAcount"))
+     {
+     	<input type="number" value="100" name="amount"></input>
 		<button value="withdraw">Withdraw</button>
 		<button value="withdraw">Deposit</button>
+     }
 	</form>
 </div>
 <div class="account getbased">
