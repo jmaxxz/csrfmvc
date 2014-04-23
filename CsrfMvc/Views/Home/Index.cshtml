@@ -5,35 +5,41 @@
 <div class="account secure">
 	<dl>
 		<dt>Name</dt><dd>CSRF protected account</dd>
-		<dt>Value</dt><dd>$@ViewBag.Balance</dd>
+		<dt>Value</dt><dd>$@ViewBag.Balance.Secure</dd>
 	</dl>
+
     @using (Html.BeginForm("Secure","BankAccount"))
     {
         @Html.AntiForgeryToken()
         <input type="number" value="100" name="amount"></input>
-        <input type="submit" value="withdraw" name="action"></input>
-        <input type="submit" value="deposit" name="action"></input>
+        <button value="withdraw" name="mode">Withdraw</button>
+        <button value="deposit" name="mode">Deposit</button>
     }
 </div>
 <div class="account unchecked">
 	<dl>
 		<dt>Name</dt><dd>Unprotected Account</dd>
-		<dt>Value</dt><dd>$@ViewBag.Balance</dd>
+		<dt>Value</dt><dd>$@ViewBag.Balance.Insecure</dd>
 	</dl>
-	@using (Html.BeginForm("SecureWithdraw", "BankAcount"))
+
+	@using (Html.BeginForm("Insecure", "BankAccount"))
      {
      	<input type="number" value="100" name="amount"></input>
-		<button value="withdraw">Withdraw</button>
-		<button value="withdraw">Deposit</button>
+        <button value="withdraw" name="mode">Withdraw</button>
+        <button value="deposit" name="mode">Deposit</button>
      }
 	</form>
 </div>
 <div class="account getbased">
 	<dl>
 		<dt>Name</dt><dd>Misuse of get account</dd>
-		<dt>Value</dt><dd>$@ViewBag.Balance</dd>
+		<dt>Value</dt><dd>$@ViewBag.Balance.Nonstandard</dd>
 	</dl>
-	<input type="number" value="100" name="amount"></input>
-	<button value="withdraw">Withdraw</button>
-	<button value="withdraw">Deposit</button>
+
+    @using (Html.BeginForm("Nonstandard", "BankAccount", FormMethod.Get))
+     {
+	    <input type="number" value="100" name="amount"></input>
+        <button value="withdraw" name="mode">Withdraw</button>
+        <button value="deposit" name="mode">Deposit</button>
+     }
 </div>
